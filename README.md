@@ -12,7 +12,7 @@ Large Vision and Language Models have enabled significant advances in fully supe
 
 ## Download Dataset
 
-We provide both the original and the edited images we computed to evaluate the hidden hallucinations of the models.
+We provide the edited version of the images of COCO Validation, which we computed to evaluate the hidden hallucinations of the models. We encourage you to download the original images using the COCO official library. We provide a script to facilitate this process. 
 ```bash
 wget https://u.pcloud.link/publink/show?code=kZLSlu0ZAvE3vnlBm5LExM9TCG4AlLttiNHy
 ```
