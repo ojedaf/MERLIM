@@ -17,7 +17,7 @@ We provide the edited version of the images of MS-COCO Validation, which we comp
 1. Download the edited images using the following link.
 From the command line (Linux)
 ```bash
-wget https://p-lux3.pcloud.com/cBZ0MHubAZgVjTAR7ZZZ70Yc7kZ2ZZ89JZkZyxE68QZd4ZIpZd8ZdHZEzZszZgLZDQZq8ZGLZQ4ZyHZzQZlpZLSlu0ZtXYmuw9KBSFicN5G95DEFSky8R1V/coco_aug.zip
+cd data & wget https://p-lux3.pcloud.com/cBZ0MHubAZgVjTAR7ZZZ70Yc7kZ2ZZ89JZkZyxE68QZd4ZIpZd8ZdHZEzZszZgLZDQZq8ZGLZQ4ZyHZzQZlpZLSlu0ZtXYmuw9KBSFicN5G95DEFSky8R1V/coco_aug.zip
 ```
 Also, It can be downloaded manually from [this website](https://u.pcloud.link/publink/show?code=kZLSlu0ZAvE3vnlBm5LExM9TCG4AlLttiNHy)
 
@@ -27,11 +27,17 @@ unzip coco_aug.zip
 ```
 3. Download the validation instance file of COCO (instances_val2017.json) from the official website.
 ```bash
-wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
+cd data & wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
 ```
-4. Install the official MS-COCO library.
 ```bash
-pip install pycocotools
+unzip annotations_trainval2017.zip
+```
+4. Create conda env from the requirements file.
+```bash
+conda create --name MERLIM_ENV --file requirements.txt
+```
+```bash
+conda activate MERLIM_ENV
 ```
 5. Run the code to download the original validation image.
 ```bash
