@@ -27,7 +27,7 @@ def run_multiprocess(operation, input, pool):
 if __name__ == '__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument("--num_process", default=10, type=int)
-    parser.add_argument("--img_dst_dir", default='./data/coco_org', type=str)
+    parser.add_argument("--img_dst_dir", default='./data/coco_aug', type=str)
     parser.add_argument("--annFile", default='./data/annotations/instances_val2017.json', type=str)
 
     args=parser.parse_args()
