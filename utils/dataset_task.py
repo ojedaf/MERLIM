@@ -3,28 +3,24 @@ import pickle
 from pycocotools.coco import COCO
 from PIL import Image
 from torch.utils.data import Dataset
-import torchvision.transforms as transforms
 from textblob import TextBlob
 
 class CocoDataset(Dataset):
     def __init__(self, path_data, type_task, question, main_img_dir='./data/coco_aug/', input_dim=512, transform=None, 
-                 path_coco_data='./data/annotations/', dataType='val2017', name_model='blip2_vicuna_instruct'):
+                 path_coco_data='./data/annotations/', dataType='val2017'):
 
         self.input_dim = input_dim
         self.type_task = type_task
         self.question = question
         self.main_img_dir = main_img_dir
-        self.name_model = name_model
         with open(path_data, 'rb') as f:
             data = pickle.load(f)
         self.list_data = []
-        for id_img, in_imgs in data.items():
+        for _, in_imgs in data.items():
             self.list_data.extend(in_imgs)
-        self.transform = transforms.ToTensor() if transform == None else transform
+        self.transform = transform
         annFile=os.path.join(path_coco_data, 'instances_{}.json'.format(dataType))
         coco=COCO(annFile)
-        annFile_cap=os.path.join(path_coco_data, 'captions_{}.json'.format(dataType))
-        coco_caps=COCO(annFile_cap)
         imgIds=sorted(coco.getImgIds())
         imgs = coco.loadImgs(imgIds)
         cats=coco.loadCats(coco.getCatIds())
@@ -52,7 +48,7 @@ class CocoDataset(Dataset):
         orig_img_name = elem['orig_img']
         img_path = os.path.join(self.main_img_dir, img_name)
         orig_img_path = os.path.join(self.main_img_dir, orig_img_name)
-        if self.name_model == 'InternLM-XComposer' or self.name_model == 'Qwen-VL' or self.name_model == 'kosmos-2':
+        if self.transform == None:
             in_image, in_image_size = '', ''
             orig_image, orig_image_size = '', ''
         else:

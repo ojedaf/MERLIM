@@ -185,12 +185,12 @@ def test_function(args):
         #question = 'How many {} are there? Only answer the number, no words and provide the shortest answer possible.' #FOR BLIP2_T5
         dataset = CocoDataset(path_data, type_task, question, main_img_dir=main_img_dir, transform=model.vis_processors, name_model=name_model)
         forward_pass_fn = eval_counting_fn
-        name_file = 'count_{}_{}.pkl'.format(exp_name, model_type)
+        name_file = 'count_{}_{}_{}.pkl'.format(exp_name, name_model, model_type)
         print('question: ',question)
     elif type_task == 'reasoning':
         dataset = CocoDataset(path_data, type_task, None, main_img_dir=main_img_dir, transform=model.vis_processors, name_model=name_model)
         forward_pass_fn = eval_reasoning_fn
-        name_file = 'reasoning_{}_{}.pkl'.format(exp_name, model_type)
+        name_file = 'reasoning_{}_{}_{}.pkl'.format(exp_name, name_model, model_type)
     else:
         num_question=int(args.num_question)
         question_0 = 'List the objects that appear in the image.'
@@ -201,9 +201,9 @@ def test_function(args):
         questions = [question_0, question_1, question_2, question_3, question_4]
         question = questions[num_question]
         print('question: ',question)
-        dataset = CocoDataset(path_data, type_task, question, main_img_dir=main_img_dir, transform=model.vis_processors, name_model=name_model)
+        dataset = CocoDataset(path_data, type_task, question, main_img_dir=main_img_dir, transform=model.vis_processors)
         forward_pass_fn = eval_classification_fn
-        name_file = 'cls_{}_{}_{}.pkl'.format(exp_name, num_question, model_type)
+        name_file = 'cls_{}_{}_{}_{}.pkl'.format(exp_name, num_question, name_model, model_type)
     test_dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
     if model != None:
         model, test_dataloader = accelerator.prepare(model, test_dataloader) 
