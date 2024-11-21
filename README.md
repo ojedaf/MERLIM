@@ -68,4 +68,4 @@ NOTE:
 - If type_task is **'reasoning'**, set name_data to **'rel_task_set_eval_curated_v3.pkl'** for **evaluating curated relationships**, or **'rel_task_set_eval_random_v3.pkl'** for **evaluating random relationships**.
 
 ## License
-The data used in this project is based on MS-COCO. Therefore, it is under the same license, CC by 4.0. 
+The data used in this project is based on MS-COCO. Therefore, it is under the same license, [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/legalcode). 
