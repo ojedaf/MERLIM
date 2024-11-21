@@ -39,7 +39,33 @@ conda create --name MERLIM_ENV --file requirements.txt
 ```bash
 conda activate MERLIM_ENV
 ```
-5. Run the code to download the original validation image.
+5. Run the code to download the original validation image in the same folder as the edited images.
 ```bash
 python download_data.py --img_dst_dir 'DESTINATION PATH FOR THE IMAGES' --annFile 'PATH TO THE FILE (instances_val2017.json)'
 ```
+
+## Install
+
+1. Install the method to be evaluated. Begin by installing the method you intend to evaluate. Ensure that all necessary dependencies are installed according to the official implementation guidelines. Below, you will find links to the official repositories for several methods.
+
+2. Develop the Evaluation Class. Extend the provided base method (./eval_methods/base_method.py) to create an evaluation class specific to your method. For guidance, refer to the implementations in BLIP3.py and BLIP2.py, which were used to evaluate XGen-MM (Phi-3 Mini), and BLIP2 and InstructBLIP, respectively.
+
+## Evaluation
+
+1. Defining the Evaluation Data.
+    - **in_data_v3:** This dataset is used to evaluate Object Counting and Object Recognition tasks.
+    - **rel_task_set_eval_curated_v3:** This dataset is designed to evaluate the Inter-object Relationship Understanding task within a curated set of relationships.
+    - **rel_task_set_eval_random_v3:** This dataset is intended to evaluate the Inter-object Relationship Understanding task within a randomly selected set of relationships.
+
+2. Run the Evaluation Task. 
+```bash
+python run_task.py --name_class 'NAME_OF_THE_CORRESPONDING_CLASS/METHOD_TO_EVAL_IN_EVAL_METHODS_FOLDER' --name_model 'NAME_OF_THE_MODEL' --model_type 'TYPE_OF_LLM_MODEL' --name_data 'NAME_OF_THE_EVALUATION_DATA_ACCORDING_TO_THE_TASK' --main_img_dir 'IMAGE_FOLDER' --main_data_dir 'FOLDER_THAT_CONTAINS_THE_EVAL_DATA' --type_task 'TASK_TO_EVAL' --exp_name 'NAME_OF_THE_EXP' --num_question 'MUST_BE_AN_INT_VALUE_FROM_0_TO_4_TO_SEL_THE_QUESTION_FOR_THE_OBJECT_RECOGNITION_TASK' --num_steps2save 'INT_VALUE_THAT_MEANS_THE_FREQUENCY_TO_SAVE' --cfg-path 'CONF_FILE_PATH_FOR_MINIGPT4' --model_path 'MODEL_PATH_FOR_LAVA/OTHERS'
+```
+NOTE: 
+- For **InstructBLIP/BLIP2**, ensure you use the **name_model and model_type** as specified in the **official repository**.
+- If type_task is **'classification'**, set **name_data** to **'in_data_v3.pkl'**.
+- If type_task is **'count'**, set name_data to **'in_data_v3.pkl'**.
+- If type_task is **'reasoning'**, set name_data to **'rel_task_set_eval_curated_v3.pkl'** for **evaluating curated relationships**, or **'rel_task_set_eval_random_v3.pkl'** for **evaluating random relationships**.
+
+## License
+The data used in this project is based on MS-COCO. Therefore, it is under the same license, CC by 4.0. 
