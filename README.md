@@ -67,5 +67,5 @@ NOTE:
 - If type_task is **'count'**, set name_data to **'in_data_v3.pkl'**.
 - If type_task is **'reasoning'**, set name_data to **'rel_task_set_eval_curated_v3.pkl'** for **evaluating curated relationships**, or **'rel_task_set_eval_random_v3.pkl'** for **evaluating random relationships**.
 
-3. Get Metrics.
-
+## License
+The data used in this project is based on MS-COCO. Therefore, it is under the same license, CC by 4.0. 
